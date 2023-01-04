@@ -1,0 +1,93 @@
+
+.opacity::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    opacity: .8;
+    z-index: -1;
+}
+.mySwipper {
+    position: relative;
+    color: #fff;
+    .images {
+        z-index: -2;
+    }
+    
+    .filmDetails {
+        text-align: center;
+        width: 100%;
+        height: 100vh;
+        padding-top: 100px;
+        .videoPlay{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            .videoIcon{
+                font-size: 6rem;
+                color: #fff;
+                margin-right: 10px;
+            }
+        }
+        .videoPlay:hover {
+            color: red;
+            transition: 1s;
+            .videoIcon {
+                color: red;
+                transition: 1s;
+            }
+        }
+        .title {
+            font-size: 54px;
+            line-height: 62px;
+            letter-spacing: 0.02em;
+            margin-top: 150px;
+            // &::after{
+            //     position: absolute;
+            //     left:0;
+            //     top:0;
+            //     right:0;
+            //     bottom:0;
+            //     background-color: rgba($color: #000000, $alpha: .5);
+            //     z-index: 2;
+            //     content:""
+            // }
+        }
+        .filmInfo {
+            ul {
+                display: flex;
+                justify-content: center;
+                li {
+                    list-style-type:disc;
+                    margin: 10px;
+                    padding: 5px;
+                    margin: 15px;
+                }
+                .years {
+                    list-style: none;
+                }
+                .type {
+                        background: red;
+
+                    }
+                .view {
+                    display: flex;
+                    align-items: center;
+                    .eyeIcon {
+                        margin-right: 5px;
+                        color: red;
+                    }
+                }
+            }
+            .para {
+                margin-top: 30px;
+                justify-self: center;
+                text-align: center;
+            }
+        }
+    }
+}

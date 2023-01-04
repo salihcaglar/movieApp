@@ -1,0 +1,84 @@
+.footer {
+    background-color: #221f1f;
+    color: #fff;
+}
+.footer .mainFooter {
+    display: flex;
+    padding: 45px;
+}
+.footer .mainFooter > div {
+    padding: 5px;
+    width: 25%;
+}
+.footer .mainFooter > div > .icons svg {
+    font-size: 1.2rem;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: .5s ease;
+}
+.footer .mainFooter > div > .icons > svg:hover {
+    color: red;
+}
+.footer .mainFooter > :nth-child(1) > p {
+    line-height: 2rem;
+    margin-bottom: 20px;
+}
+.footer .mainFooter > div > img {
+    width: 70%;
+    margin-bottom: 15px;
+}
+.footer .mainFooter .listElems > div {
+    display: flex;
+    padding: 10px 20px;
+}
+.footer .mainFooter .listElems > div > ul {
+    list-style-type: none;
+    width: 100%;
+}
+.footer .mainFooter .listElems > div > ul > li {
+    width: 100%;
+    margin: 20px 0;
+}
+.footer .mainFooter .listElems > div > ul > li > a {
+    color: #fff;
+    width: 100%;
+    padding: 20px 0;
+}
+.footer .mainFooter .listElems>div>ul>li>a:hover {
+    color: #E50916;
+    transition: .5s;
+}
+.footer .mainFooter .listElems > div > ul > li::before {
+    content: "\2022";
+    color: red;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+.footer .mainFooter > :last-child > h2 {
+    margin-bottom: 20px;
+}
+.footer .mainFooter> :last-child>p {
+    line-height: 2rem;
+    margin-bottom: 10px;
+}
+.loginAndApple {
+    display: flex;
+    width: 100%;
+}
+.loginAndApple > a {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+.loginAndApple > a > img {
+    width: 80%;
+}
+.botFooter {
+    width: 100%;
+    text-align: center;
+    background-color: #E50916;
+    padding: 20px 0;
+    font-size: 1rem;
+}
