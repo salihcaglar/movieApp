@@ -6,17 +6,8 @@ import "swiper/css";
 import { useState, useEffect } from "react";
 import { Autoplay, Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
-const FilmList = ({ data }) => {
-  const [movieData, setMovieData] = useState([]);
-  const getMovieList = () =>
-    fetch(
-      `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}`
-    )
-      .then((response) => response.json())
-      .then((movies) => setMovieData(movies.results));
-  useEffect(() => {
-    getMovieList();
-  }, []);
+const FilmList = ({ data, filmData }) => {
+
   return (
     <div className={styles.filmList}>
       <div className={styles.header}>
@@ -33,7 +24,8 @@ const FilmList = ({ data }) => {
         slidesPerView={4}
         navigation
       >
-        {movieData.map((movie) => {
+
+        {filmData.results.map((movie) => {
           return (
             <SwiperSlide key={movie.id} className={styles.movieSlide}>
               <Film

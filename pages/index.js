@@ -3,7 +3,7 @@ import Swiper from "../components/swiper/Swiper";
 import FilmList from "../components/filmlist/FilmList";
 import Slider from "../components/slider/Slider";
 
-export default function Home() {
+export default function Home({ filmData }) {
   return (
     <>
       <Head>
@@ -13,14 +13,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Swiper />
-      <FilmList data={"Trend"} />
-      <FilmList data={"Popular"} />
-      <Slider />
-      <FilmList data={"Most Liked"} />
+      <Swiper filmData={filmData} play={true} />
+      <FilmList data={"Trend"} filmData={filmData} />
+      {/* <FilmList data={"Popular"} /> */}
+      <Slider play={false} />
+      {/* <FilmList data={"Most Liked"} /> */}
       {/* <FilmList data={trend} title={'Trend Videos'} url={'url'}/>
       <FilmList data={trend} title={'Popular Videos'} url={'url'}/>
       <FilmList data={trend} title={'Recent Videos'} url={'url'}/> */}
     </>
   );
 }
+
+export const getServerSideProps = async () => {
+  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}`);
+  const filmData = await res.json();
+  return {
+    props: {
+      filmData,
+    },
+  };
+};
