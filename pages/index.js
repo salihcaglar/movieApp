@@ -15,12 +15,9 @@ export default function Home({ filmData }) {
 
       <Swiper filmData={filmData} play={true} />
       <FilmList data={"Trend"} filmData={filmData} />
-      {/* <FilmList data={"Popular"} /> */}
+      <FilmList data={"Popular"} filmData={filmData} />
       <Slider play={false} />
-      {/* <FilmList data={"Most Liked"} /> */}
-      {/* <FilmList data={trend} title={'Trend Videos'} url={'url'}/>
-      <FilmList data={trend} title={'Popular Videos'} url={'url'}/>
-      <FilmList data={trend} title={'Recent Videos'} url={'url'}/> */}
+      <FilmList data={"Most Liked"} filmData={filmData} />
     </>
   );
 }
