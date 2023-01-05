@@ -1,0 +1,89 @@
+.film {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.film .image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: 120%;
+  background-position: center;
+  transition: 0.7s;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s ease-in;
+}
+
+.film .image:hover {
+  background-size: 135%;
+}
+.film .image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+.film .image .playBtn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  color: red;
+}
+.film:hover .playBtn {
+  display: flex;
+}
+.film .image .icons {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 1.5rem;
+}
+.film .image .icons > div {
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.film .image .icons > div > div {
+  display: flex;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 100%;
+  font-size: 1rem;
+  background: #fff;
+  color: #000;
+  padding: 5px;
+}
+.film .image .icons > div:hover > div {
+  display: flex;
+}
+.film .image .icons > div > div > svg {
+  font-size: 1.2rem;
+  margin: 5px 0;
+  transition: 0.5s;
+}
+.film .image .icons > div > div > svg:hover {
+  color: red;
+}
+.film .details {
+  color: #fff;
+  padding: 10px 0;
+  line-height: 2rem;
+}
+.film .details > span {
+  margin-right: 20px;
+}

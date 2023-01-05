@@ -1,12 +1,10 @@
-import Head from 'next/head'
-import Swiper from '../components/Swiper'
-import FilmList from '../components/FilmList'
-import Slider from '../components/Slider'
+import Head from "next/head";
+import Swiper from "../components/swiper/Swiper";
+import FilmList from "../components/filmlist/FilmList";
+import Slider from "../components/slider/Slider";
 
 export default function Home() {
   return (
-
-
     <>
       <Head>
         <title>Create Next App</title>
@@ -14,15 +12,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Swiper/>
-      <FilmList data={'Trend'}/>
-      <FilmList data={'Popular'}/>
+
+      <Swiper />
+      <FilmList data={"Trend"} />
+      <FilmList data={"Popular"} />
       <Slider />
-      <FilmList data={'Most Liked'}/>
+      <FilmList data={"Most Liked"} />
       {/* <FilmList data={trend} title={'Trend Videos'} url={'url'}/>
       <FilmList data={trend} title={'Popular Videos'} url={'url'}/>
       <FilmList data={trend} title={'Recent Videos'} url={'url'}/> */}
-
     </>
-  )
+  );
 }

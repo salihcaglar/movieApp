@@ -1,22 +1,21 @@
-import React from 'react'
-import styles from '../styles/_Footer.module.scss'
+import React from "react";
+import styles from "../../components/footer/_Footer.module.scss";
 
-import {FaFacebookF, FaInstagram, FaSkype, FaTwitter} from 'react-icons/fa'
-
+import { FaFacebookF, FaInstagram, FaSkype, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {
   return (
     <div className={styles.footer}>
       <div className={styles.mainFooter}>
         <div>
-            <img src='./images/Logo-2.png' alt="" />
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt similique laudantium temporibus!</p>
-            <div className={styles.icons}>
-                <FaFacebookF />
-                <FaInstagram />
-                <FaSkype />
-                <FaTwitter />
-            </div>
+          <img src="./images/Logo-2.png" alt="" />
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt similique laudantium temporibus!</p>
+          <div className={styles.icons}>
+            <FaFacebookF />
+            <FaInstagram />
+            <FaSkype />
+            <FaTwitter />
+          </div>
         </div>
         <div className={styles.listElems}>
           <h2>Explore</h2>
@@ -88,8 +87,12 @@ const Footer = () => {
           <h2>Download App</h2>
           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia quod eveniet velit in deleniti repudiandae cum atque, alias eligendi. Earum.</p>
           <div className={styles.loginAndApple}>
-            <a href=""><img src="./images/getPlay.png" alt="" /></a>
-            <a href=""><img src="./images/getApp.png" alt="" /></a>
+            <a href="">
+              <img src="./images/getPlay.png" alt="" />
+            </a>
+            <a href="">
+              <img src="./images/getApp.png" alt="" />
+            </a>
           </div>
         </div>
       </div>
@@ -97,7 +100,7 @@ const Footer = () => {
         <p>Copyright 2021 streamlab All Rights Reserved.</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Footer;
