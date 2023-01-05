@@ -180,21 +180,25 @@ const Header = () => {
                 <Link href="/">Pricing</Link>
               </li>
               <li>
-                <Link href="#">Contact Us</Link>
+                <Link href="/">Contact Us</Link>
               </li>
             </ul>
           </div>
         </div>
-        <div className={styles.user}>
-          <a href="" className={styles.search_icon}>
+        <div className={styles.user} >
+          <Link href="/" className={styles.search_icon} style={{ position: "relative" }}>
             <BiSearch />
-          </a>
-          <a href="" className={styles.user_icon}>
+            <div>
+              <input />
+              <button><BiSearch /></button>
+            </div>
+          </Link>
+          <Link href="/" className={styles.user_icon}>
             <FaUserAlt />
-          </a>
-          <a href="" className={styles.subscribe}>
+          </Link>
+          <Link href="/" className={styles.subscribe}>
             SUBSCRIBE
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -32,6 +32,7 @@ const Film = ({ title = "Film Adı Gelmedi", imdb = "5.0", date = "25.10.2022", 
           </div>
           <div>
             <AiOutlineShareAlt />
+            
             <div>
               <FaFacebookF />
               <FaInstagram />

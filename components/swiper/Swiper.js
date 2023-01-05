@@ -11,6 +11,8 @@ import "swiper/css/scrollbar";
 import Image from "next/image";
 
 export default ({ filmData, play }) => {
+
+
   return (
     <div className={styles.mySwipper}>
       <Swiper

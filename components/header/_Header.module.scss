@@ -44,7 +44,7 @@
 }
 .dropdowns .dropdown > button > svg {
   margin-left: 5px;
-  stroke-width: .07rem;
+  stroke-width: 0.07rem;
 }
 .dropdowns .dropdown:hover > button {
   color: red;
@@ -72,25 +72,49 @@
 .user {
   display: flex;
   align-items: center;
-    .search_icon {
-      font-size: 20px;
-      color: #fff;
-      font-weight: bold;
-      margin: 0 10px;
-    }
-    .user_icon {
-      font-size: 15px;
-      padding: 15px;
-      color: #fff;
-      background-color: red;
-      border-radius: 50%;
-      margin: 0 10px;
-    }
-    .subscribe {
-      padding: 12px;
-      color: #fff;
-      background-color: red;
-      margin: 0 10px;
-    }
+  .search_icon {
+    font-size: 20px;
+    color: #fff;
+    font-weight: bold;
+    margin: 0 10px;
+  }
+  .user_icon {
+    font-size: 15px;
+    padding: 15px;
+    color: #fff;
+    background-color: red;
+    border-radius: 50%;
+    margin: 0 10px;
+  }
+  .subscribe {
+    padding: 12px;
+    color: #fff;
+    background-color: red;
+    margin: 0 10px;
+  }
 }
 
+.search_icon > div {
+  position: absolute;
+  display: flex;
+  right: 0;
+  top: 50px;
+  padding: 20px;
+  background: gray;
+}
+
+.search_icon > div > input {
+  padding: 10px;
+  background: #000;
+  color: #fff;
+  border: none;
+  outline: none;
+}
+.search_icon > div > button {
+
+}
+.search_icon > div  svg {
+  font-size: 2rem;
+  background: red;
+  color: #fff;
+}

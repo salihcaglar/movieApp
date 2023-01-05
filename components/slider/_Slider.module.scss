@@ -28,11 +28,11 @@
 
 .filmInfo {
     position: absolute;
-    width: 50%;
+    width: 60%;
     height: 100%;
     color: #fff;
     z-index: 2;
-    top: 100px;
+    top: 50px;
     left: 50px;
     overflow: hidden;
 }
@@ -42,39 +42,8 @@
 .filmInfo h1 {
     font-size: 3rem;
     margin-bottom: 20px;
+    text-transform: uppercase;
 }
-
-// .slideLeft {
-//     h1 {
-//         animation: .5s scrollleft;
-//         animation-delay: 1s;
-//         display: block;
-//     }
-//     .filmDetails {
-//         animation: .7s scrollleft;
-//         animation-delay: 1s;
-//     }
-//     p {
-//         animation: .9s scrollleft;
-//         animation-delay: 1s;
-//     }
-//     button {
-//         animation: 1.1s scrollleft;
-//         animation-delay: 1s;
-//     }
-// }
-
-
-// @keyframes scrollleft {
-    
-//     from {
-//         margin-left: 1300px;
-//     }
-//     to {
-//         margin-left: 0;
-//         display: block;
-//     }
-// }
 
 .filmInfo > .filmDetails {
     margin-bottom: 30px;

@@ -1,11 +1,9 @@
 import styles from "../../components/slider/_Slider.module.scss";
 import { Autoplay, Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Data from "../Data";
-
 import { AiFillEye, AiFillCaretRight } from "react-icons/ai";
 
-const Slider = () => {
+const Slider = ( {filmData} ) => {
   return (
     <div className={styles.slider}>
       <Swiper
@@ -20,26 +18,26 @@ const Slider = () => {
         slidesPerView={1}
         navigation
       >
-        {Data.map((dat) => {
+        {filmData.results.map((film) => {
           return (
-            <SwiperSlide key={dat.id} style={{ height: "450px" }} className={styles.slide}>
+            <SwiperSlide key={film.id} style={{ height: "450px" }} className={styles.slide}>
               <div className={styles.filmInfo}>
-                <h1>{dat.title}</h1>
+                <h1>{film.title || film.name}</h1>
                 <div className={styles.filmDetails}>
-                  <span>{dat.years} Years</span>
-                  <span style={{ background: "#e50916", padding: "5px" }}>{dat.type}</span>
+                  <span>{film.release_date || "25.10.2022"}</span>
+                  <span style={{ background: "#e50916", padding: "5px" }}>{film.media_type}</span>
                   <span>
-                    <AiFillEye /> {dat.views} Views
+                    <AiFillEye /> {film.vote_average} Views
                   </span>
                 </div>
-                <p>{dat.text}</p>
+                <p>{film.overview}</p>
                 <button>
                   <AiFillCaretRight />
                   PLAY NOW
                 </button>
               </div>
               <div className={styles.images}>
-                <img src={dat.src} alt="" className={styles.image} />
+                <img src={`https://image.tmdb.org/t/p/original${film.backdrop_path}`} alt="" className={styles.image} />
                 <div className={styles.opacity}></div>
               </div>
             </SwiperSlide>
