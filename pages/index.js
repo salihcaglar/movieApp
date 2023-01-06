@@ -16,7 +16,7 @@ export default function Home({ filmData }) {
       <Swiper filmData={filmData} play={true} />
       <FilmList data={"Trend"} filmData={filmData} />
       <FilmList data={"Popular"} filmData={filmData} />
-      <Swiper filmData={filmData} />
+      {/* <Swiper filmData={filmData} /> */}
       <Slider filmData={filmData} play={false} />
       <FilmList data={"Most Liked"} filmData={filmData} />
     </>
@@ -24,7 +24,7 @@ export default function Home({ filmData }) {
 }
 
 export const getServerSideProps = async () => {
-  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}`);
+  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&language=pt-EN&page=3`);
   const filmData = await res.json();
   return {
     props: {

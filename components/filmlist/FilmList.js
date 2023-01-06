@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { Autoplay, Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
 const FilmList = ({ data, filmData }) => {
-
   return (
     <div className={styles.filmList}>
       <div className={styles.header}>

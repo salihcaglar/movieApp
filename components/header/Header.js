@@ -2,12 +2,14 @@ import styles from "../../components/header/_Header.module.scss";
 import { BsChevronDown } from "react-icons/bs";
 import { BiSearch, BiLogIn } from "react-icons/bi";
 import { FaUserAlt, FaTimes } from "react-icons/fa";
+import { FiMenu } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const Header = () => {
   const [openSearch, setOpenSearch] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
+  const [openLeftMenu, setOpenLeftMenu] = useState(false)
 
   const changeOpenSearch = () => {
     setOpenSearch(!openSearch);
@@ -43,7 +45,8 @@ const Header = () => {
     >
       <div className={styles.navbar}>
         <div className={styles.logo}></div>
-        <div className={styles.dropdowns}>
+        <div className={styles.dropdownsRightSide}></div>
+        <div className={styles.dropdowns} style={{left:openLeftMenu?'0':'-300px'}}>
           <div className={styles.dropdown}>
             <button>
               Home <BsChevronDown />
@@ -202,7 +205,6 @@ const Header = () => {
         <div className={styles.user}>
           <Link href="/" className={styles.search_icon} style={{ position: "relative" }}>
             {openSearch ? <FaTimes onClick={changeOpenSearch} /> : <BiSearch onClick={changeOpenSearch} />}
-            {/* <BiSearch onClick={() => setOpenSearch(!openSearch)}/> */}
             <div className={styles.search} style={{ display: openSearch ? "block" : "none" }}>
               <label>
                 <input placeholder="Search .." />
@@ -228,6 +230,9 @@ const Header = () => {
           <Link href="/" className={styles.subscribe}>
             SUBSCRIBE
           </Link>
+          <button className={styles.hamburger} onClick={()=> setOpenLeftMenu(!openLeftMenu)}>
+            <FiMenu />
+          </button>
         </div>
       </div>
     </div>
