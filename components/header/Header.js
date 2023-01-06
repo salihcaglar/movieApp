@@ -1,12 +1,26 @@
 import styles from "../../components/header/_Header.module.scss";
 import { BsChevronDown } from "react-icons/bs";
-import { BiSearch } from "react-icons/bi";
-import { FaUserAlt } from "react-icons/fa";
+import { BiSearch, BiLogIn } from "react-icons/bi";
+import { FaUserAlt, FaTimes } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const Header = () => {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [openSearch, setOpenSearch] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
+
+  const changeOpenSearch = () => {
+    setOpenSearch(!openSearch);
+    setOpenLogin(false);
+  };
+
+  const changeOpenLogin = () => {
+    setOpenLogin(!openLogin);
+    setOpenSearch(false);
+  };
+
+  const [scrollPosition, setScrollPosition] = useState(false);
+
   const handleScroll = () => {
     const position = window.pageYOffset;
     setScrollPosition(position);
@@ -185,17 +199,32 @@ const Header = () => {
             </ul>
           </div>
         </div>
-        <div className={styles.user} >
+        <div className={styles.user}>
           <Link href="/" className={styles.search_icon} style={{ position: "relative" }}>
-            <BiSearch />
-            <div>
-              <input />
-              <button><BiSearch /></button>
+            {openSearch ? <FaTimes onClick={changeOpenSearch} /> : <BiSearch onClick={changeOpenSearch} />}
+            {/* <BiSearch onClick={() => setOpenSearch(!openSearch)}/> */}
+            <div className={styles.search} style={{ display: openSearch ? "block" : "none" }}>
+              <label>
+                <input placeholder="Search .." />
+                <button>
+                  <BiSearch />
+                </button>
+              </label>
             </div>
           </Link>
-          <Link href="/" className={styles.user_icon}>
+          <button onClick={changeOpenLogin} className={styles.user_icon} style={{ position: "relative" }}>
             <FaUserAlt />
-          </Link>
+            <div className={styles.userMenu} style={{ display: openLogin ? "block" : "none" }}>
+              <Link href="/">
+                <BiLogIn />
+                Login
+              </Link>
+              <Link href="/">
+                <FaUserAlt />
+                Register
+              </Link>
+            </div>
+          </button>
           <Link href="/" className={styles.subscribe}>
             SUBSCRIBE
           </Link>

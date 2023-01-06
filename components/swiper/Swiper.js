@@ -20,7 +20,7 @@ export default ({ filmData, play }) => {
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
         autoplay={{
-          delay: 20000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         slidesPerView={1}

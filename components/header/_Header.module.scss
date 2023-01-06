@@ -77,6 +77,9 @@
     color: #fff;
     font-weight: bold;
     margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .user_icon {
     font-size: 15px;
@@ -85,6 +88,14 @@
     background-color: red;
     border-radius: 50%;
     margin: 0 10px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
   }
   .subscribe {
     padding: 12px;
@@ -96,25 +107,64 @@
 
 .search_icon > div {
   position: absolute;
-  display: flex;
-  right: 0;
+  padding: 10px;
   top: 50px;
-  padding: 20px;
-  background: gray;
+  right: -30px;
+  display: flex;
+  align-items: center;
+  background-color: #161616;
+  transition: 1s ease-in-out;
+  height: 74px;
 }
 
-.search_icon > div > input {
-  padding: 10px;
-  background: #000;
-  color: #fff;
+.search_icon > div > label {
+  display: flex;
+  align-items: center;
+}
+
+.search_icon > div > label > input {
   border: none;
   outline: none;
-}
-.search_icon > div > button {
-
-}
-.search_icon > div  svg {
-  font-size: 2rem;
-  background: red;
+  height: 54px;
+  background: #000;
   color: #fff;
+  font-size: 1rem;
+  padding: 10px;
+}
+.search_icon > div > label > button {
+  height: 54px;
+  width: 54px;
+  background-color: red;
+  color: #fff;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.search_icon > div > label > button:hover {
+  background-color: #e50916;
+  transition: 0.5s;
+}
+.userMenu {
+  position: absolute;
+  top: 62px;
+  right: -30px;
+  display: flex;
+  flex-direction: column;
+  background-color: #161616;
+}
+.userMenu > a {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  width: 200px;
+  color: #fff;
+}
+.userMenu > a:hover {
+  background-color: red;
+  transition: 0.8s;
+}
+.userMenu > a > svg {
+  margin-right: 20px;
 }

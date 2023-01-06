@@ -33,10 +33,10 @@
             }
         }
         .videoPlay:hover {
-            color: red;
+            color: rgb(224, 141, 126);
             transition: 1s;
             .videoIcon {
-                color: red;
+                color: rgb(224, 141, 126);
                 transition: 1s;
             }
         }
@@ -45,16 +45,6 @@
             line-height: 62px;
             letter-spacing: 0.02em;
             margin-top: 50px;
-            // &::after{
-            //     position: absolute;
-            //     left:0;
-            //     top:0;
-            //     right:0;
-            //     bottom:0;
-            //     background-color: rgba($color: #000000, $alpha: .5);
-            //     z-index: 2;
-            //     content:""
-            // }
         }
         .filmInfo {
             ul {
