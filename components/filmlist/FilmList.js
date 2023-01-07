@@ -7,6 +7,15 @@ import { useState, useEffect } from "react";
 import { Autoplay, Navigation, Pagination, Scrollbar, A11y } from "swiper";
 
 const FilmList = ({ data, filmData }) => {
+
+  const [width, setWidth] = useState();
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  });
+  console.log(width);
+  
   return (
     <div className={styles.filmList}>
       <div className={styles.header}>
@@ -20,7 +29,7 @@ const FilmList = ({ data, filmData }) => {
           delay: 20000,
           disableOnInteraction: false,
         }}
-        slidesPerView={4}
+        slidesPerView={width>920?4:2}
         navigation
       >
 

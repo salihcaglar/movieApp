@@ -24,7 +24,7 @@ export default function Home({ filmData }) {
 }
 
 export const getServerSideProps = async () => {
-  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&language=pt-EN&page=3`);
+  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&page=6`);
   const filmData = await res.json();
   return {
     props: {
