@@ -29,7 +29,7 @@ const FilmList = ({ data, filmData }) => {
           delay: 20000,
           disableOnInteraction: false,
         }}
-        slidesPerView={width>920?4:2}
+        slidesPerView={width<920?'2':'4'}
         navigation
       >
 
