@@ -19,7 +19,7 @@ const Detail = () => {
       {searchResult.results &&
         searchResult.results.map((searchedFilm) => {
           return (
-            <div style={{ margin: "0 20px" }}>
+            <div style={{ margin: "0 19px" }}>
               <Film title={searchedFilm.title} imdb={searchedFilm.vote_average.toFixed(2)} date={searchedFilm.release_date} src={searchedFilm.backdrop_path} />
             </div>
           );
