@@ -11,12 +11,12 @@ const Header = () => {
   const [openLogin, setOpenLogin] = useState(false);
   const [openLeftMenu, setOpenLeftMenu] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  
-  const searchFilm = () => {
-    const data = fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${inputValue}`)
-    .then(res=>res.json())
-    .then(datas=>console.log(datas))
-  };
+
+  // const searchFilm = () => {
+  //   const data = fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${inputValue}`)
+  //     .then((res) => res.json())
+  //     .then((datas) => console.log(datas));
+  // };
 
   const changeOpenSearch = () => {
     setOpenSearch(!openSearch);
@@ -221,10 +221,10 @@ const Header = () => {
             {openSearch ? <FaTimes onClick={changeOpenSearch} /> : <BiSearch onClick={changeOpenSearch} />}
             <div className={styles.search} style={{ display: openSearch ? "block" : "none" }}>
               <label>
-                <input placeholder="Search .." onChange={(e) => setInputValue(e.target.value)}/>
-                <button onClick={searchFilm}>
-                  <Link href={`/searchdetail/${inputValue}`}>
-                    <BiSearch/>
+                <input placeholder="Search .." onChange={(e) => setInputValue(e.target.value)} />
+                <button>
+                  <Link href={`/searchresults/${inputValue}`}>
+                    <BiSearch />
                   </Link>
                 </button>
               </label>
@@ -256,4 +256,3 @@ const Header = () => {
 };
 
 export default Header;
-

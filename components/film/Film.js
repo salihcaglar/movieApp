@@ -25,7 +25,7 @@ const Film = ({ title = "Film Adı Gelmedi", imdb = "5.0", date = "25.10.2022", 
         <div className={styles.icons}>
           <div>
             <AiOutlinePlus />
-            
+
             <div>+ Sign in to add this video to a playlist</div>
           </div>
           <div>
