@@ -9,14 +9,25 @@ import Link from "next/link";
 const Header = () => {
   const [openSearch, setOpenSearch] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
-  const [openLeftMenu, setOpenLeftMenu] = useState(false)
+  const [openLeftMenu, setOpenLeftMenu] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  
+  const searchFilm = () => {
+    const data = fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${inputValue}`)
+    .then(res=>res.json())
+    .then(datas=>console.log(datas))
+  };
 
   const changeOpenSearch = () => {
     setOpenSearch(!openSearch);
     setOpenLogin(false);
   };
+  const closeDropdowns = (e) => {
+    setOpenLogin(false);
+    setOpenSearch(false);
+  };
 
-  const changeOpenLogin = () => {
+  const changeOpenLogin = (e) => {
     setOpenLogin(!openLogin);
     setOpenSearch(false);
   };
@@ -43,10 +54,13 @@ const Header = () => {
         backgroundColor: scrollPosition > 400 ? "rgb(34, 34, 34)" : "rgb(34, 34, 34, 0.4)",
       }}
     >
+      <div className={styles.overlay} onClick={closeDropdowns} style={{ display: openSearch || openLogin ? "block" : "none" }}></div>
       <div className={styles.navbar}>
-        <div className={styles.logo}></div>
+        <Link href="/">
+          <div className={styles.logo}></div>
+        </Link>
         <div className={styles.dropdownsRightSide}></div>
-        <div className={styles.dropdowns} style={{left:openLeftMenu?'0':'-300px'}}>
+        <div className={styles.dropdowns} style={{ left: openLeftMenu ? "0" : "-300px" }}>
           <div className={styles.dropdown}>
             <button>
               Home <BsChevronDown />
@@ -203,25 +217,27 @@ const Header = () => {
           </div>
         </div>
         <div className={styles.user}>
-          <Link href="/" className={styles.search_icon} style={{ position: "relative" }}>
+          <div className={styles.search_icon} style={{ position: "relative" }}>
             {openSearch ? <FaTimes onClick={changeOpenSearch} /> : <BiSearch onClick={changeOpenSearch} />}
             <div className={styles.search} style={{ display: openSearch ? "block" : "none" }}>
               <label>
-                <input placeholder="Search .." />
-                <button>
-                  <BiSearch />
+                <input placeholder="Search .." onChange={(e) => setInputValue(e.target.value)}/>
+                <button onClick={searchFilm}>
+                  <Link href={`/searchdetail/${inputValue}`}>
+                    <BiSearch/>
+                  </Link>
                 </button>
               </label>
             </div>
-          </Link>
+          </div>
           <button onClick={changeOpenLogin} className={styles.user_icon} style={{ position: "relative" }}>
             <FaUserAlt />
             <div className={styles.userMenu} style={{ display: openLogin ? "block" : "none" }}>
-              <Link href="/">
+              <Link href="/login">
                 <BiLogIn />
                 Login
               </Link>
-              <Link href="/">
+              <Link href="/register">
                 <FaUserAlt />
                 Register
               </Link>
@@ -230,7 +246,7 @@ const Header = () => {
           <Link href="/" className={styles.subscribe}>
             SUBSCRIBE
           </Link>
-          <button className={styles.hamburger} onClick={()=> setOpenLeftMenu(!openLeftMenu)}>
+          <button className={styles.hamburger} onClick={() => setOpenLeftMenu(!openLeftMenu)}>
             <FiMenu />
           </button>
         </div>
@@ -240,3 +256,4 @@ const Header = () => {
 };
 
 export default Header;
+
