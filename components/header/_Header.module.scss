@@ -16,7 +16,7 @@
   right: 0;
   background: rgba(0, 0, 0, 0.3);
   z-index: 0;
-  display:block;
+  display: block;
 }
 .navbar {
   display: flex;
@@ -146,7 +146,7 @@
 .search_icon > div > label > button {
   border: none;
 }
-.search_icon > div > label > button > a{
+.search_icon > div > label > button > a {
   height: 54px;
   width: 54px;
   background-color: red;
@@ -250,5 +250,18 @@
   .hamburger {
     display: flex;
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .logo {
+    display: none;
+  }
+  .search {
+    left: -40px;
+  }
+  .userMenu {
+    left: -50px;
+    right: -100px;
   }
 }

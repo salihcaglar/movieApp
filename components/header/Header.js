@@ -3,7 +3,8 @@ import { BsChevronDown } from "react-icons/bs";
 import { BiSearch, BiLogIn } from "react-icons/bi";
 import { FaUserAlt, FaTimes } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import Router from "next/router";
 import Link from "next/link";
 
 const Header = () => {
@@ -21,6 +22,10 @@ const Header = () => {
   const changeOpenSearch = () => {
     setOpenSearch(!openSearch);
     setOpenLogin(false);
+    setInputValue("");
+    if (!openSearch) {
+      console.log("asd");
+    }
   };
   const closeDropdowns = (e) => {
     setOpenLogin(false);
@@ -38,6 +43,25 @@ const Header = () => {
     const position = window.pageYOffset;
     setScrollPosition(position);
   };
+
+  // function Input() {
+  //   const ref = useRef(null);
+
+  //   inputRef.current.focus();
+  // }
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (openSearch) {
+      inputRef.current.focus();
+    }
+  }, [openSearch]);
+
+  function handleKeyPress(event) {
+    if (event.key === "Enter" && inputValue.length > 2) {
+      Router.push("/searchresults/" + inputValue);
+      setOpenSearch(false);
+    }
+  }
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -59,7 +83,6 @@ const Header = () => {
         <Link href="/">
           <div className={styles.logo}></div>
         </Link>
-        <div className={styles.dropdownsRightSide}></div>
         <div className={styles.dropdowns} style={{ left: openLeftMenu ? "0" : "-300px" }}>
           <div className={styles.dropdown}>
             <button>
@@ -221,9 +244,15 @@ const Header = () => {
             {openSearch ? <FaTimes onClick={changeOpenSearch} /> : <BiSearch onClick={changeOpenSearch} />}
             <div className={styles.search} style={{ display: openSearch ? "block" : "none" }}>
               <label>
-                <input placeholder="Search .." onChange={(e) => setInputValue(e.target.value)} />
+                <input ref={inputRef} placeholder="Search .." value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyPress={handleKeyPress} />
                 <button>
-                  <Link href={`/searchresults/${inputValue}`}>
+                  <Link
+                    href={`/searchresults/${inputValue}`}
+                    onClick={() => {
+                      setOpenSearch(false);
+                      setInputValue("");
+                    }}
+                  >
                     <BiSearch />
                   </Link>
                 </button>
