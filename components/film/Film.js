@@ -16,7 +16,7 @@ const Film = ({ title = "Film Adı Gelmedi", imdb = "5.0", date = "25.10.2022", 
       <div
         className={styles.image}
         style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/w500${src})`,
+          backgroundImage: src ? `url(https://image.tmdb.org/t/p/w500${src})` : "url(../images/biletinial.png)",
         }}
       >
         <div className={styles.playBtn}>

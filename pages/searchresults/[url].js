@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import Film from "../../components/film/Film";
 import React, { useEffect, useState } from "react";
+import styles from "../../pages/searchresults/_Url.module.scss";
 
 const Detail = () => {
   const [searchResult, setSearchedResult] = useState([]);
@@ -15,17 +16,34 @@ const Detail = () => {
   }, [url]);
   console.log(searchResult);
   return (
-    <div style={{ padding: "90px 30px 0 30px", display: "flex", flexWrap: "wrap", backgroundColor: "#616161" }}>
-      {searchResult.results &&
-        searchResult.results.map((searchedFilm) => {
-          return (
-            <div style={{ margin: "0 19px" }}>
-              <Film title={searchedFilm.title} imdb={searchedFilm.vote_average.toFixed(2)} date={searchedFilm.release_date} src={searchedFilm.backdrop_path} />
-            </div>
-          );
-        })}
-    </div>
+    <>
+      <div className={styles.searchContainer}>
+        <h1>Arama Sonuçlarınız</h1>
+        <div className={styles.searchResults}>
+          {searchResult.results &&
+            searchResult.results.map((searchedFilm) => {
+              return (
+                <div className={styles.searchResult} key={searchedFilm.id}>
+                  <Film title={searchedFilm.title} imdb={searchedFilm.vote_average.toFixed(2)} date={searchedFilm.release_date} src={searchedFilm.backdrop_path} />
+                </div>
+              );
+            })}
+        </div>
+      </div>
+    </>
   );
 };
 
 export default Detail;
+
+// export const getServerSideProps = async () => {
+//   const router = useRouter();
+//   const { url } = router.query;
+//   const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${url}`);
+//   const searchResult = await res.json();
+//   return {
+//     props: {
+//       searchResult,
+//     },
+//   };
+// };
