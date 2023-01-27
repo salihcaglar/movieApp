@@ -9,6 +9,10 @@ const Detail = () => {
   const router = useRouter();
   const { url } = router.query;
 
+  const handleClick = () => {
+    setShowMore(!showMore);
+  };
+
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${url}`)
       .then((res) => res.json())
@@ -27,9 +31,18 @@ const Detail = () => {
                 <div className={styles.searchResult} key={searchedFilm.id}>
                   <Film title={searchedFilm.title} imdb={searchedFilm.vote_average.toFixed(2)} date={searchedFilm.release_date} src={searchedFilm.backdrop_path} />
                   <div className={styles.overview}>
-                    {showMore ? <p>{searchedFilm.overview}</p> : <p>{searchedFilm.overview.substring(0, 100)}</p>}
+                    {/* {showMore ? <p>{searchedFilm.overview}</p> : <button onClick={handleClick}>show less</button>}
 
-                    {showMore ? <button onClick={() => setShowMore(!showMore)}>show less</button> : <button onClick={() => setShowMore(!showMore)}>show more</button>}
+                    {showMore ? <p>{searchedFilm.overview.substring(0, 100)}</p> : <button onClick={handleClick}>show more</button>} */}
+                    {showMore ? (
+                      <div>
+                        <p>{searchedFilm.overview}</p> <button onClick={handleClick}>show less</button>
+                      </div>
+                    ) : (
+                      <div>
+                        <p>{searchedFilm.overview.substring(0, 100)}</p> <button onClick={handleClick}>show more</button>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
