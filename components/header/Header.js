@@ -12,20 +12,14 @@ const Header = () => {
   const [openLogin, setOpenLogin] = useState(false);
   const [openLeftMenu, setOpenLeftMenu] = useState(false);
   const [inputValue, setInputValue] = useState("");
-
-  // const searchFilm = () => {
-  //   const data = fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${inputValue}`)
-  //     .then((res) => res.json())
-  //     .then((datas) => console.log(datas));
-  // };
+  const [searchingData, setSearchingData] = useState([]);
+  const [fullValue, setFullValue] = useState("");
 
   const changeOpenSearch = () => {
     setOpenSearch(!openSearch);
     setOpenLogin(false);
     setInputValue("");
-    if (!openSearch) {
-      console.log("asd");
-    }
+    setSearchingData([]);
   };
   const closeDropdowns = (e) => {
     setOpenLogin(false);
@@ -44,11 +38,6 @@ const Header = () => {
     setScrollPosition(position);
   };
 
-  // function Input() {
-  //   const ref = useRef(null);
-
-  //   inputRef.current.focus();
-  // }
   const inputRef = useRef(null);
   useEffect(() => {
     if (openSearch) {
@@ -56,12 +45,27 @@ const Header = () => {
     }
   }, [openSearch]);
 
-  function handleKeyPress(event) {
+  const handleKeyPress = (inputValue) => {
+    setInputValue(inputValue);
+    console.log(inputValue);
+    setFullValue(inputValue);
+    setSearchingData([]);
+    if (inputValue.length > 2) {
+      const searchingFilm = () => {
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${inputValue}`)
+          .then((res) => res.json())
+          .then((datas) => setSearchingData(datas.results));
+      };
+      searchingFilm();
+      console.log(searchingData);
+    }
+
     if (event.key === "Enter" && inputValue.length > 2) {
       Router.push("/searchresults/" + inputValue);
       setOpenSearch(false);
+      setInputValue("");
     }
-  }
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -244,7 +248,7 @@ const Header = () => {
             {openSearch ? <FaTimes onClick={changeOpenSearch} /> : <BiSearch onClick={changeOpenSearch} />}
             <div className={styles.search} style={{ display: openSearch ? "block" : "none" }}>
               <label>
-                <input ref={inputRef} placeholder="Search .." value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyPress={handleKeyPress} />
+                <input ref={inputRef} type="text" placeholder="Search .." onKeyUp={(e) => handleKeyPress(e.target.value)} />
                 <button>
                   <Link
                     href={`/searchresults/${inputValue}`}
@@ -257,6 +261,17 @@ const Header = () => {
                   </Link>
                 </button>
               </label>
+              <div className={styles.searchingDiv}>
+                {searchingData &&
+                  searchingData.map((searchingDat) => {
+                    return (
+                      <div key={searchingDat.id} className={styles.searchingDat_item}>
+                        <div className={styles.searchingDiv_background} style={{ backgroundImage: searchingDat.backdrop_path ? `url(https://image.tmdb.org/t/p/w500${searchingDat.backdrop_path}` : "url(../images/404erroricon.svg)" }}></div>
+                        <span>{searchingDat.title}</span>
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           </div>
           <button onClick={changeOpenLogin} className={styles.user_icon} style={{ position: "relative" }}>

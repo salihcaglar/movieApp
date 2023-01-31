@@ -6,7 +6,6 @@ import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
 
 const Film = ({ title = "Film Adı Gelmedi", imdb = "5.0", date = "25.10.2022", src }) => {
   const [clicked, setClicked] = useState(false);
-
   const handleClick = () => {
     setClicked(!clicked);
   };
@@ -25,7 +24,6 @@ const Film = ({ title = "Film Adı Gelmedi", imdb = "5.0", date = "25.10.2022", 
         <div className={styles.icons}>
           <div>
             <AiOutlinePlus />
-
             <div>+ Sign in to add this video to a playlist</div>
           </div>
           <div>
@@ -33,7 +31,6 @@ const Film = ({ title = "Film Adı Gelmedi", imdb = "5.0", date = "25.10.2022", 
           </div>
           <div>
             <AiOutlineShareAlt />
-
             <div>
               <FaFacebookF />
               <FaInstagram />
