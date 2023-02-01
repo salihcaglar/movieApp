@@ -14,7 +14,7 @@ const Detail = () => {
   };
 
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${url}`)
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${url}&language=tr-TR`)
       .then((res) => res.json())
       .then((data) => setSearchResult(data));
   }, [url]);
@@ -29,19 +29,21 @@ const Detail = () => {
               return (
                 <div className={styles.searchResult} key={searchedFilm.id}>
                   <Film title={searchedFilm.title} imdb={searchedFilm.vote_average.toFixed(2)} date={searchedFilm.release_date} src={searchedFilm.backdrop_path} />
-                  <div className={styles.overview}>
-                    {selectedComponent === index ? (
-                      <div>
-                        <p className={styles.overview_popen}>{searchedFilm.overview}</p>
-                        <button onClick={() => handleClick(null)}>show less</button>
-                      </div>
-                    ) : (
-                      <div>
-                        <p className={styles.overview_p}>{searchedFilm.overview}</p>
-                        <button onClick={() => handleClick(index)}>show more</button>
-                      </div>
-                    )}
-                  </div>
+                  {searchedFilm.overview && (
+                    <div className={styles.overview}>
+                      {selectedComponent === index ? (
+                        <div>
+                          <p className={styles.overview_popen}>{searchedFilm.overview}</p>
+                          <button onClick={() => handleClick(null)}>show less</button>
+                        </div>
+                      ) : (
+                        <div>
+                          <p className={styles.overview_p}>{searchedFilm.overview}</p>
+                          <button onClick={() => handleClick(index)}>show more</button>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}

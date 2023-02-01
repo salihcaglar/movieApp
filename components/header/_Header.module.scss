@@ -207,6 +207,10 @@
   background-color: #161616;
   max-height: 600px;
   overflow-y: auto;
+  overflow-x: hidden;
+  a {
+    color: #fff;
+  }
 }
 .searchingDat_item {
   padding: 10px 0;
@@ -221,7 +225,9 @@
 
 .searchingDat_item:hover {
   background-color: rgb(201, 128, 128);
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-out;
+  color: #000;
+  scale: 1.1;
 }
 .searchingDiv_background {
   width: 40px;

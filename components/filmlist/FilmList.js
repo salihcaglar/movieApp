@@ -16,7 +16,7 @@ const FilmList = ({ data, filmData, width }) => {
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
         autoplay={{
-          delay: 20000,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         slidesPerView={width < 600 ? "1" : width < 920 ? "2" : "4"}
@@ -25,7 +25,7 @@ const FilmList = ({ data, filmData, width }) => {
         {filmData.results.map((movie) => {
           return (
             <SwiperSlide key={movie.id} className={styles.movieSlide}>
-              <Film title={movie.title} imdb={movie.vote_average.toFixed(2)} date={movie.release_date} src={movie.backdrop_path} />
+              <Film title={movie.title} imdb={movie.vote_average.toFixed(2)} date={movie.release_date} src={movie.backdrop_path} id={movie.id}/>
             </SwiperSlide>
           );
         })}

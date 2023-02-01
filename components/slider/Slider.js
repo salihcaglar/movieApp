@@ -3,7 +3,7 @@ import { Autoplay, Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { AiFillEye, AiFillCaretRight } from "react-icons/ai";
 
-const Slider = ( {filmData} ) => {
+const Slider = ({ filmData }) => {
   return (
     <div className={styles.slider}>
       <Swiper
@@ -11,7 +11,7 @@ const Slider = ( {filmData} ) => {
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
         autoplay={{
-          delay: 5000,
+          delay: 10000,
           disableOnInteraction: false,
         }}
         pagination={{ clickable: true }}

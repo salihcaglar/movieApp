@@ -6,6 +6,7 @@ import { FiMenu } from "react-icons/fi";
 import { useState, useEffect, useRef } from "react";
 import Router from "next/router";
 import Link from "next/link";
+import slug from "slug";
 
 const Header = () => {
   const [openSearch, setOpenSearch] = useState(false);
@@ -13,7 +14,6 @@ const Header = () => {
   const [openLeftMenu, setOpenLeftMenu] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [searchingData, setSearchingData] = useState([]);
-  const [fullValue, setFullValue] = useState("");
 
   const changeOpenSearch = () => {
     setOpenSearch(!openSearch);
@@ -45,19 +45,17 @@ const Header = () => {
     }
   }, [openSearch]);
 
+  const searchingFilm = () => {
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${inputValue}&language=tr-TR`)
+      .then((res) => res.json())
+      .then((datas) => setSearchingData(datas.results));
+  };
+
   const handleKeyPress = (inputValue) => {
     setInputValue(inputValue);
-    console.log(inputValue);
-    setFullValue(inputValue);
     setSearchingData([]);
     if (inputValue.length > 2) {
-      const searchingFilm = () => {
-        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${inputValue}`)
-          .then((res) => res.json())
-          .then((datas) => setSearchingData(datas.results));
-      };
       searchingFilm();
-      console.log(searchingData);
     }
 
     if (event.key === "Enter" && inputValue.length > 2) {
@@ -265,10 +263,12 @@ const Header = () => {
                 {searchingData &&
                   searchingData.map((searchingDat) => {
                     return (
-                      <div key={searchingDat.id} className={styles.searchingDat_item}>
-                        <div className={styles.searchingDiv_background} style={{ backgroundImage: searchingDat.backdrop_path ? `url(https://image.tmdb.org/t/p/w500${searchingDat.backdrop_path}` : "url(../images/404erroricon.svg)" }}></div>
-                        <span>{searchingDat.title}</span>
-                      </div>
+                      <Link onClick={() => setOpenSearch(false)} key={searchingDat.id} href={`/movie/${searchingDat.id}`} as={`/movie/${slug(searchingDat.title)}-${searchingDat.id}`}>
+                        <div className={styles.searchingDat_item}>
+                          <div className={styles.searchingDiv_background} style={{ backgroundImage: searchingDat.backdrop_path ? `url(https://image.tmdb.org/t/p/w500${searchingDat.backdrop_path}` : "url(../images/404erroricon.svg)" }}></div>
+                          <span>{searchingDat.title}</span>
+                        </div>
+                      </Link>
                     );
                   })}
               </div>

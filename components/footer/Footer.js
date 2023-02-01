@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../../components/footer/_Footer.module.scss";
+import Image from "next/image";
 
 import { FaFacebookF, FaInstagram, FaSkype, FaTwitter } from "react-icons/fa";
 
@@ -88,10 +89,10 @@ const Footer = () => {
           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia quod eveniet velit in deleniti repudiandae cum atque, alias eligendi. Earum.</p>
           <div className={styles.loginAndApple}>
             <a href="">
-              <img src="./images/getPlay.png" alt="" />
+              <Image src="/images/getPlay.png" width={160} height={50} alt="" />
             </a>
             <a href="">
-              <img src="./images/getApp.png" alt="" />
+              <Image src="/images/getApp.png" width={160} height={50} alt="" />
             </a>
           </div>
         </div>

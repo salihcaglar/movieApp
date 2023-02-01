@@ -1,83 +1,84 @@
 .slider {
-    width: 100%;
-    padding: 50px;
-    background: #161616;
+  width: 100%;
+  padding: 50px;
+  background: #161616;
 }
 
- .slider .slide {
-    border-left: 5px solid #b81d24;
+.slider .slide {
+  border-left: 5px solid #b81d24;
 }
-.slider>.slide>.images {
-    width: 100%;
-    height: 100%;
-    position: relative;
+
+.slider > .slide > .images {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .opacity::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .image {
-    width: 100%;
+  width: 100%;
 }
 
 .filmInfo {
-    position: absolute;
-    width: 60%;
-    height: 100%;
-    color: #fff;
-    z-index: 2;
-    top: 50px;
-    left: 50px;
-    overflow: hidden;
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  color: #fff;
+  z-index: 2;
+  top: 50px;
+  left: 50px;
+  overflow: hidden;
 }
 .filmInfo > * {
-    display: inline-block;
+  display: inline-block;
 }
 .filmInfo h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .filmInfo > .filmDetails {
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
 }
 .filmInfo > .filmDetails > span > svg {
-    color: #b81d24;
-    font-size: 1.3rem;
-    margin-right: 5px;
+  color: #b81d24;
+  font-size: 1.3rem;
+  margin-right: 5px;
 }
-.filmInfo > .filmDetails >*{
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.filmInfo > .filmDetails > * {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .filmInfo p {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    line-height: 2rem;
-    color: #cecfd1;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  line-height: 2rem;
+  color: #cecfd1;
 }
 .filmInfo button {
-    padding: 15px 30px;
-    background: #e50916;
-    color: #fff;
-    border: none;
-    font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+  padding: 15px 30px;
+  background: #e50916;
+  color: #fff;
+  border: none;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 .filmInfo > svg {
-    margin-right: 5px;
+  margin-right: 5px;
 }

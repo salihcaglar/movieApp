@@ -31,10 +31,10 @@ export default function Home({ filmData }) {
 }
 
 export const getServerSideProps = async () => {
-  // const page = Math.ceil(Math.random() * 20);
-  // console.log(page);
+  const page = Math.ceil(Math.random() * 20);
+  console.log(page);
 
-  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&page=${61}`);
+  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&page=${page}&language=tr-TR`);
   const filmData = await res.json();
   return {
     props: {
