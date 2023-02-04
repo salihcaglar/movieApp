@@ -3,8 +3,9 @@ import Swiper from "../components/swiper/Swiper";
 import FilmList from "../components/filmlist/FilmList";
 import Slider from "../components/slider/Slider";
 import { useState, useEffect } from "react";
+import Header from "../components/header/Header";
 
-export default function Home({ filmData }) {
+export default function Home({ filmData, genres, genreFilms }) {
   const [width, setWidth] = useState();
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -20,7 +21,7 @@ export default function Home({ filmData }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <Header genres={genres} />
       <Swiper filmData={filmData} play={true} />
       <FilmList data={"Trend"} filmData={filmData} width={width} />
       <FilmList data={"Popular"} filmData={filmData} width={width} />
@@ -32,13 +33,21 @@ export default function Home({ filmData }) {
 
 export const getServerSideProps = async () => {
   const page = Math.ceil(Math.random() * 20);
-  console.log(page);
 
-  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&page=${page}&language=tr-TR`);
+  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&page=${41}&language=tr-TR`);
   const filmData = await res.json();
+
+  const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.DB_KEY}&language=en-EN`);
+  const genres = await response.json();
+
+  const request = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.DB_KEY}&with_genres=28&language=en-US`);
+  const genreFilms = await request.json();
+
   return {
     props: {
       filmData,
+      genres,
+      genreFilms,
     },
   };
 };

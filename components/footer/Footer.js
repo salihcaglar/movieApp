@@ -9,7 +9,7 @@ const Footer = () => {
     <div className={styles.footer}>
       <div className={styles.mainFooter}>
         <div>
-          <img src="./images/Logo-2.png" alt="" />
+          <Image src="/images/Logo-2.png" width={300} height={100} alt=""></Image>
           <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nesciunt similique laudantium temporibus!</p>
           <div className={styles.icons}>
             <FaFacebookF />

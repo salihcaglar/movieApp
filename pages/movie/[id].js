@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import styles from "../movie/_Movie.module.css";
 import Image from "next/image";
 import slug from "slug";
+import Popup from "reactjs-popup";
+import { FaTimes } from "react-icons/fa";
 
 export default function MovieDetail({ filmInfo }) {
   const router = useRouter();
   const { id } = router.query;
-
-  console.log(filmInfo.production_companies);
 
   return (
     <div className={styles.container}>
@@ -20,10 +20,19 @@ export default function MovieDetail({ filmInfo }) {
           })}
       </div>
       <div className={styles.content}>
-        <Image src={`https://image.tmdb.org/t/p/original${filmInfo.poster_path}` || `https://image.tmdb.org/t/p/original${filmInfo.backdrop_path}`} width={300} height={300} alt={filmInfo.title || filmInfo.name} className={styles.poster} />
+        <Popup trigger={<Image style={{ cursor: "zoom-in" }} src={`https://image.tmdb.org/t/p/original${filmInfo.poster_path}` || `https://image.tmdb.org/t/p/original${filmInfo.backdrop_path}`} width={300} height={300} alt={filmInfo.title || filmInfo.name} />} modal>
+          {(close) => (
+            <div style={{ width: "70vw", height: "90vh" }}>
+              <Image src={`https://image.tmdb.org/t/p/original${filmInfo.poster_path}` || `https://image.tmdb.org/t/p/original${filmInfo.backdrop_path}`} fill alt={filmInfo.title || filmInfo.name} className={styles.poster} />
+              <button onClick={close} style={{ position: "absolute", right: "0", top: "0", width: "30px", height: "30px", display: "flex", alignItems: "center", justifyContent: "center", border: "none", outline: "none", cursor: "pointer" }}>
+                <FaTimes />
+              </button>
+            </div>
+          )}
+        </Popup>
+
         <div className={styles.content_details}>
           {filmInfo.popularity && <span>Popülerlik: {filmInfo.popularity}</span>}
-          {filmInfo.production_companies.length > 0 && <span>Yapımcı Firma: {filmInfo.production_companies[0].name}</span>}
           {filmInfo.release_date && <span>Filmin Çıkış Tarihi: {filmInfo.release_date}</span>}
           {filmInfo.runtime && <span>Film Süresi: {filmInfo.runtime} dakika</span>}
           {filmInfo.overview && <span>Açıklama: {filmInfo.overview}</span>}
@@ -48,7 +57,6 @@ export async function getServerSideProps({ params }) {
 // export const getServerSideProps = async (id) => {
 //   const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.DB_KEY}`);
 //   const filmInfo = await res.json();
-//   console.log(filmInfo);
 //   return {
 //     props: {
 //       filmInfo,

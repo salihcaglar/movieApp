@@ -10,6 +10,9 @@ const FilmList = ({ data, filmData, width }) => {
     <div className={styles.filmList}>
       <div className={styles.header}>
         <h2>{data} Videos</h2>
+        {/* {genres.genres.map((g) => {
+          return <li key={g.id}>{g.name}</li>;
+        })} */}
         <button>More Videos</button>
       </div>
       <Swiper
@@ -25,7 +28,7 @@ const FilmList = ({ data, filmData, width }) => {
         {filmData.results.map((movie) => {
           return (
             <SwiperSlide key={movie.id} className={styles.movieSlide}>
-              <Film title={movie.title} imdb={movie.vote_average.toFixed(2)} date={movie.release_date} src={movie.backdrop_path} id={movie.id}/>
+              <Film title={movie.title} imdb={movie.vote_average.toFixed(2)} date={movie.release_date} src={movie.backdrop_path} id={movie.id} />
             </SwiperSlide>
           );
         })}

@@ -1,6 +1,7 @@
 .container {
   padding: 90px 90px 0 90px;
   background-color: #c6a7c6;
+  position: relative;
 }
 
 .header {
@@ -17,11 +18,13 @@
   color: #fff;
   margin-right: 10px;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .content {
   display: flex;
   padding: 20px 0 40px 0;
+  
 }
 .content > img {
   border-radius: 12px;
@@ -35,6 +38,7 @@
   font-size: 16px;
   margin-bottom: 12px;
 }
+
 @media screen and (max-width: 650px) {
   .content {
     flex-direction: column;

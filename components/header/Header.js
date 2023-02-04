@@ -8,12 +8,19 @@ import Router from "next/router";
 import Link from "next/link";
 import slug from "slug";
 
-const Header = () => {
+const Header = ({ genres, genreFilms }) => {
+  // console.log(genres?.genres);
   const [openSearch, setOpenSearch] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openLeftMenu, setOpenLeftMenu] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [searchingData, setSearchingData] = useState([]);
+
+  const [genresData, setGenresData] = useState([]);
+
+  useEffect(() => {
+    if (genres?.genres?.length > 0) setGenresData(genres.genres);
+  }, [genres]);
 
   const changeOpenSearch = () => {
     setOpenSearch(!openSearch);
@@ -45,15 +52,14 @@ const Header = () => {
     }
   }, [openSearch]);
 
-  const searchingFilm = () => {
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${inputValue}&language=tr-TR`)
-      .then((res) => res.json())
-      .then((datas) => setSearchingData(datas.results));
-  };
-
   const handleKeyPress = (inputValue) => {
     setInputValue(inputValue);
     setSearchingData([]);
+    const searchingFilm = () => {
+      fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.DB_KEY}&query=${inputValue}&language=tr-TR`)
+        .then((res) => res.json())
+        .then((datas) => setSearchingData(datas.results));
+    };
     if (inputValue.length > 2) {
       searchingFilm();
     }
@@ -87,158 +93,16 @@ const Header = () => {
         </Link>
         <div className={styles.dropdowns} style={{ left: openLeftMenu ? "0" : "-300px" }}>
           <div className={styles.dropdown}>
-            <button>
-              Home <BsChevronDown />
-            </button>
-            <ul>
-              <li>
-                <Link href="/">Main Home</Link>
-              </li>
-              <li>
-                <Link href="/">Movies Home</Link>
-              </li>
-              <li>
-                <Link href="/">Tw Shows Home</Link>
-              </li>
-              <li>
-                <Link href="/">Video Home</Link>
-              </li>
-            </ul>
-          </div>
-          <div className={styles.dropdown}>
-            <button>
-              Movies <BsChevronDown />
-            </button>
-            <ul>
-              <li>
-                <ul>
-                  <li>
-                    <Link href="/">Movies List</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Load More</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Infinite Scroll</Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <ul>
-                  <li>
-                    <Link href="/">Movies List</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Load More</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Infinite Scroll</Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <ul>
-                  <li>
-                    <Link href="/">Movies List</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Load More</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Infinite Scroll</Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <ul>
-                  <li>
-                    <Link href="/">Movies List</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Load More</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Infinite Scroll</Link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div className={styles.dropdown}>
-            <button>
-              Tw Shows <BsChevronDown />
-            </button>
-            <ul>
-              <li>
-                <ul>
-                  <li>
-                    <Link href="/">Movies List</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Load More</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Infinite Scroll</Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <ul>
-                  <li>
-                    <Link href="/">Movies List</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Load More</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Infinite Scroll</Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <ul>
-                  <li>
-                    <Link href="/">Movies List</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Load More</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Infinite Scroll</Link>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <ul>
-                  <li>
-                    <Link href="/">Movies List</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Load More</Link>
-                  </li>
-                  <li>
-                    <Link href="/">Infinite Scroll</Link>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div className={styles.dropdown}>
-            <button>
-              Pages <BsChevronDown />
-            </button>
-            <ul>
-              <li>
-                <Link href="/">Blog</Link>
-              </li>
-
-              <li>
-                <Link href="/">Pricing</Link>
-              </li>
-              <li>
-                <Link href="/">Contact Us</Link>
-              </li>
-            </ul>
+            {/* <button>
+              Türe Göre Arama <BsChevronDown />
+            </button> */}
+            {genresData?.length > 0 ? (
+              <ul data-id="test">
+                {genresData?.map((item, index) => (
+                  <li key={index}>{item.name}</li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         </div>
         <div className={styles.user}>
@@ -300,3 +164,38 @@ const Header = () => {
 };
 
 export default Header;
+
+// https://api.themoviedb.org/3/discover/movie?api_key=b1f37208505d197304b3983a228e9173&with_genres=28&language=en-US
+
+// export async function getStaticPaths() {
+//   const res = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.DB_KEY}&with_genres=${params.id}&language=tr-TR`);
+//   const genres = await res.json();
+//   const paths = genres.map((genre) => {
+//     return { params: { id: `${genre.id}` } };
+//   });
+//   return {
+//     paths,
+//   };
+// }
+
+// // `getStaticPaths` requires using `getStaticProps`
+// export async function getStaticProps() {
+//   const data = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.DB_KEY}&language=tr-TR`);
+//   const genreIds = await data.json();
+//   return {
+//     props: {
+//       genreIds,
+//     },
+//   };
+// }
+
+// export const getServerSideProps = async () => {
+//   const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.DB_KEY}&language=tr-TR`);
+//   const turler = await response.json();
+
+//   return {
+//     props: {
+//       turler,
+//     },
+//   };
+// };

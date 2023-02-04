@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  background-color: gray;
 }
 
 .film .image {
@@ -14,6 +15,7 @@
   cursor: pointer;
   background-repeat: no-repeat;
   transition: background-size 0.5s ease-in;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .film .image:hover {
@@ -80,7 +82,7 @@
 }
 .film .details {
   color: #fff;
-  padding: 10px 0;
+  padding: 10px;
   line-height: 2rem;
 }
 .film .details > span {
