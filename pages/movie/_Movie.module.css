@@ -12,7 +12,7 @@
   margin-bottom: 20px;
 }
 
-.header > span {
+.header > a {
   padding: 10px 15px;
   background-color: brown;
   color: #fff;

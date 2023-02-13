@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styles from "../film/_Film.module.scss";
 import { AiFillPlayCircle, AiOutlineShareAlt, AiFillHeart, AiOutlinePlus } from "react-icons/ai";
@@ -8,12 +8,18 @@ import slug from "slug";
 
 const Film = ({ title = "Film Adı Gelmedi", imdb = "5.0", date = "25.10.2022", src, id }) => {
   const [clicked, setClicked] = useState(false);
+  const [favourites, setFavourites] = useState([]);
   const handleClick = () => {
     setClicked(!clicked);
   };
 
+
+useEffect(() => {
+  localStorage.setItem('items', JSON.stringify(favourites));
+}, [favourites]);
+
   return (
-    <Link href={`/movie/${id}`} as={`/movie/${slug(title)}-${id}`}>
+    
       <div className={styles.film}>
         <div
           className={styles.image}
@@ -42,13 +48,15 @@ const Film = ({ title = "Film Adı Gelmedi", imdb = "5.0", date = "25.10.2022", 
             </div>
           </div>
         </div>
+        <Link href={`/movie/${id}`} as={`/movie/${slug(title)}-${id}`}>
         <div className={styles.details}>
           <h4>{title}</h4>
           <span>{date}</span>
           <span>IMDB: {imdb}</span>
         </div>
+        </Link>
       </div>
-    </Link>
+   
   );
 };
 

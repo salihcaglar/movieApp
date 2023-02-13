@@ -7,7 +7,6 @@ const Slider = ({ filmData }) => {
   return (
     <div className={styles.slider}>
       <Swiper
-        // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
         spaceBetween={50}
         autoplay={{

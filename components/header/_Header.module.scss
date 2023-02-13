@@ -55,6 +55,7 @@
   display: inline-block;
   height: 100%;
   margin: 0 20px;
+
 }
 .dropdowns .dropdown > button {
   height: 100%;
@@ -81,6 +82,9 @@
   flex-direction: column;
   display: none;
   background-color: #000;
+  height: 350px;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 .dropdown ul li > a {
   min-width: 200px;

@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styles from "./_Register.module.scss";
+import {useForm} from 'react-hook-form'
 
 function Copyright(props) {
   return (
@@ -59,10 +60,10 @@ export default function SignUp() {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Box component="form"  onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                  <TextField autoComplete="given-name" name="firstName" required fullWidth id="firstName" label="First Name" autoFocus />
+                  <TextField autoComplete="given-name" name="firstName" required fullWidth id="firstName" label="First Name" autoFocus  />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField required fullWidth id="lastName" label="Last Name" name="lastName" autoComplete="family-name" />

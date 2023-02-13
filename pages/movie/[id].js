@@ -5,6 +5,7 @@ import Image from "next/image";
 import slug from "slug";
 import Popup from "reactjs-popup";
 import { FaTimes } from "react-icons/fa";
+import Link from "next/link";
 
 export default function MovieDetail({ filmInfo }) {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function MovieDetail({ filmInfo }) {
         <h2>{filmInfo.title}</h2>
         {filmInfo.genres &&
           filmInfo.genres.map((genre) => {
-            return <span key={genre.id}>{genre.name}</span>;
+            return <Link href={`/genre/${genre.id}`} as={`/genre/${slug(genre.name)}-${genre.id}-page1`} key={genre.id}>{genre.name}</Link>;
           })}
       </div>
       <div className={styles.content}>

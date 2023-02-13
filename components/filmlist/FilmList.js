@@ -10,9 +10,7 @@ const FilmList = ({ data, filmData, width }) => {
     <div className={styles.filmList}>
       <div className={styles.header}>
         <h2>{data} Videos</h2>
-        {/* {genres.genres.map((g) => {
-          return <li key={g.id}>{g.name}</li>;
-        })} */}
+
         <button>More Videos</button>
       </div>
       <Swiper

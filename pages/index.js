@@ -3,9 +3,8 @@ import Swiper from "../components/swiper/Swiper";
 import FilmList from "../components/filmlist/FilmList";
 import Slider from "../components/slider/Slider";
 import { useState, useEffect } from "react";
-import Header from "../components/header/Header";
 
-export default function Home({ filmData, genres, genreFilms }) {
+export default function Home({ filmData1, filmData2, filmData3 }) {
   const [width, setWidth] = useState();
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
@@ -21,33 +20,37 @@ export default function Home({ filmData, genres, genreFilms }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header genres={genres} />
-      <Swiper filmData={filmData} play={true} />
-      <FilmList data={"Trend"} filmData={filmData} width={width} />
-      <FilmList data={"Popular"} filmData={filmData} width={width} />
-      <Slider filmData={filmData} play={false} />
-      <FilmList data={"Most Liked"} filmData={filmData} width={width} />
+      <Swiper filmData={filmData1} play={true} />
+      <FilmList data={"Trend"} filmData={filmData1} width={width} />
+      <FilmList data={"Popular"} filmData={filmData2} width={width} />
+      <Slider filmData={filmData2} play={false} />
+      <FilmList data={"Most Liked"} filmData={filmData3} width={width} />
     </>
   );
 }
 
 export const getServerSideProps = async () => {
-  const page = Math.ceil(Math.random() * 20);
+  const page1 = Math.ceil(Math.random() * 20);
+  const page2 = Math.ceil(Math.random() * 20);
+  const page3 = Math.ceil(Math.random() * 20);
 
-  const res = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&page=${41}&language=tr-TR`);
-  const filmData = await res.json();
+  const res1 = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&page=${page1}&language=tr-TR`);
+  const filmData1 = await res1.json();
+  const res2 = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&page=${page2}&language=tr-TR`);
+  const filmData2 = await res2.json();
+  const res3 = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.DB_KEY}&page=${page3}&language=tr-TR`);
+  const filmData3 = await res3.json();
 
   const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.DB_KEY}&language=en-EN`);
   const genres = await response.json();
 
-  const request = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.DB_KEY}&with_genres=28&language=en-US`);
-  const genreFilms = await request.json();
+
 
   return {
     props: {
-      filmData,
-      genres,
-      genreFilms,
+      filmData1,
+      filmData2,
+      filmData3,
     },
   };
 };

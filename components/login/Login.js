@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styles from "./_Login.module.scss";
+import toast, { Toaster } from 'react-hot-toast';
+import { useState } from "react";
 
 function Copyright(props) {
   return (
@@ -30,16 +32,26 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
+  
+
+  
+
+  const mailuzunlukyeterli = () => toast.success('Giriş yapıldı.');
+  const mailuzunlukyetersiz = () => toast.error('geçersiz e mail');
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
+      
     });
   };
 
-  return (
+  const [email,setEmail] = useState("")
+  const [password,setPassword] = useState("")
+
+  return  (
     <>
       <img src="./images/loginbg.jpg" className={styles.background} />
       <ThemeProvider theme={theme}>
@@ -60,12 +72,17 @@ export default function Login() {
               Sign in
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField fontColor="green" margin="normal" required fullWidth id="email" label="Email Address" name="email" autoComplete="email" autoFocus />
-              <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
+              <TextField
+              onKeyUp={(e)=>setEmail(e.target.value)} margin="normal" required fullWidth id="email" label="Email Address" name="email"  autoComplete="email" autoFocus />
+              <TextField onKeyUp={(e)=>setPassword(e.target.value)} margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
               <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              <Button onClick={email.length>3?mailuzunlukyeterli:mailuzunlukyetersiz}  type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                 Sign In
               </Button>
+              <Toaster 
+              position="top-right"
+              reverseOrder={false}
+              />
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
@@ -84,5 +101,5 @@ export default function Login() {
         </Container>
       </ThemeProvider>
     </>
-  );
+  ) ;
 }
