@@ -20,7 +20,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        StreamLab
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -31,14 +31,23 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  // const {register,handleSubmit, formState:{errors}} = useForm()
+
+  // const onSubmit=(data) => {
+  //   console.log(data);
+  // }
+
+
+
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get("email"),
+  //     password: data.get("password"),
+  //   });
+  // };
 
   return (
     <>
@@ -60,7 +69,8 @@ export default function SignUp() {
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
-            <Box component="form"  onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <form>
+            <Box component="form" sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField autoComplete="given-name" name="firstName" required fullWidth id="firstName" label="First Name" autoFocus  />
@@ -78,7 +88,7 @@ export default function SignUp() {
                   <FormControlLabel control={<Checkbox value="allowExtraEmails" color="primary" />} label="I want to receive inspiration, marketing promotions and updates via email." />
                 </Grid>
               </Grid>
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              <Button type="submit" color="primary" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                 Sign Up
               </Button>
               <Grid container justifyContent="flex-end">
@@ -89,6 +99,7 @@ export default function SignUp() {
                 </Grid>
               </Grid>
             </Box>
+            </form>
           </Box>
           <Copyright sx={{ mt: 5 }} />
         </Container>
