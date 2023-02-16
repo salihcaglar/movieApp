@@ -1,12 +1,11 @@
 
-import Login from "../components/register/Register";
-import Register2 from "../components/register/Register2";
+import Register from "../components/register/Register";
 
 const RegisterPage = () => {
   return ( 
     <>
-      <Login />
-      {/* <Register2/> */}
+      {/* <Login /> */}
+      <Register />
     </>
    );
 }

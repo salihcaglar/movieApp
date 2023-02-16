@@ -17,3 +17,22 @@
   -webkit-filter: blur(6px);
   opacity: 0.4;
 }
+.mailCode {
+  margin-top: 200px;
+  width: 250px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.successRegister {
+  margin-top: 200px;
+}
+.successRegister > p {
+  font-size: 25px;
+  color: green;
+}
+.successRegister > span {
+  font-size: 15px;
+}

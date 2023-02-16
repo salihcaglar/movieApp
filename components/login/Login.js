@@ -13,7 +13,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import styles from "./_Login.module.scss";
-import toast, { Toaster } from 'react-hot-toast';
+import { useFormik } from "formik";
+import * as yup from "yup";
+import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
 
 function Copyright(props) {
@@ -21,7 +23,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        StreamLab
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -31,27 +33,35 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+const validationSchema = yup.object({
+  email: yup.string("Enter your email").email("Enter a valid email").required("Email is required"),
+  password: yup.string("Enter your password").min(8, "Password should be of minimum 8 characters length").required("Password is required"),
+});
+
 export default function Login() {
-  
 
-  
 
-  const mailuzunlukyeterli = () => toast.success('Giriş yapıldı.');
-  const mailuzunlukyetersiz = () => toast.error('geçersiz e mail');
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-      
-    });
-  };
+  const notify = () => toast.success("Giriş yapıldı. Ana sayfaya yönlendiriliyorsunuz.");
 
-  const [email,setEmail] = useState("")
-  const [password,setPassword] = useState("")
 
-  return  (
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      {notify()}
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 1000);
+    },
+    
+  });
+  <Toaster 
+  position="top-right"
+  reverseOrder={false}/>
+  return (
     <>
       <img src="./images/loginbg.jpg" className={styles.background} />
       <ThemeProvider theme={theme}>
@@ -71,35 +81,33 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-              <TextField
-              onKeyUp={(e)=>setEmail(e.target.value)} margin="normal" required fullWidth id="email" label="Email Address" name="email"  autoComplete="email" autoFocus />
-              <TextField onKeyUp={(e)=>setPassword(e.target.value)} margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
-              <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-              <Button onClick={email.length>3?mailuzunlukyeterli:mailuzunlukyetersiz}  type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                Sign In
-              </Button>
-              <Toaster 
-              position="top-right"
-              reverseOrder={false}
-              />
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
+            <form onSubmit={formik.handleSubmit}>
+              <Box sx={{ mt: 1 }}>
+                <TextField margin="normal" fullWidth id="email" label="email giriniz" name="email" autoComplete="email" value={formik.values.email} onChange={formik.handleChange} error={formik.touched.email && Boolean(formik.errors.email)} helperText={formik.touched.email && formik.errors.email} autoFocus />
+                <TextField margin="normal" fullWidth id="password" label="parola giriniz" name="password" type="password" value={formik.values.password} onChange={formik.handleChange} error={formik.touched.password && Boolean(formik.errors.password)} helperText={formik.touched.password && formik.errors.password} />
+                <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                  Sign In
+                </Button>
+                <Toaster position="top-right" reverseOrder={false} />
+                <Grid container>
+                  <Grid item xs>
+                    <Link href="#" variant="body2">
+                      Forgot password?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href="/register" variant="body2">
+                      {"Don't have an account? Sign Up"}
+                    </Link>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Link href="/register" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
-            </Box>
+              </Box>
+            </form>
           </Box>
           <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>
       </ThemeProvider>
     </>
-  ) ;
+  );
 }
