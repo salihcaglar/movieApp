@@ -1,3 +1,9 @@
+import { auth, googleProvider } from "../../config/firebase";
+import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {db} from '../../config/firebase'
+import { getDocs, collection} from 'firebase/firestore'
+
+
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -15,7 +21,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import styles from "./_Register.module.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Copyright(props) {
   return (
@@ -36,10 +42,57 @@ const validationSchema = yup.object({
   password: yup.string("Enter your password").min(8, "Password should be of minimum 8 characters length").required("Password is required"),
   name: yup.string("enter name").required("isim kısmı boş bırakılamaz").min(3, "isim en az 3 karakter içermeli"),
   surname: yup.string("enter surname").required("soy-isim kısmı boş bırakılamaz").min(3, "isim en az 3 karakter içermeli"),
-  code: yup.string("enter code")
+  code: yup.string("enter code"),
 });
 
 export default function SignUp() {
+
+  const [movielist,setMovieList] = useState([]);
+
+  const moviesCollectionRef = collection(db, "movies")
+
+  useEffect(() => {
+    const getMovieList = async () => {
+      // read data 
+      // set list
+      try {
+        const data = await getDocs(moviesCollectionRef)
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getMovieList()
+  }, [])
+
+  const getMovieList = () => {
+
+  }
+
+  
+  const signIn = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, formik.values.email, formik.values.password, formik.values.name);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const signInWithGoogle = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, googleProvider);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const logout = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const [registered, setRegistered] = useState(false);
   const [registerDone, setRegisterDone] = useState(false);
 
@@ -110,9 +163,10 @@ export default function SignUp() {
                     <FormControlLabel control={<Checkbox value="allowExtraEmails" color="primary" />} label="I want to receive inspiration, marketing promotions and updates via email." />
                   </Grid>
                 </Grid>
-                <Button type="submit" color="primary" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+                <Button onClick={signIn} type="submit" color="primary" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                   Sign Up
                 </Button>
+                
                 <Grid container justifyContent="flex-end">
                   <Grid item>
                     <Link href="/login" variant="body2">
@@ -120,7 +174,14 @@ export default function SignUp() {
                     </Link>
                   </Grid>
                 </Grid>
+                <Button onClick={signInWithGoogle} variant="outlined" color="secondary">
+                  Google ile giriş yap
+                </Button>
+                <Button onClick={logout} style={{position:"absolute" , right:"20px", top:"100px "}} variant="outlined" color="warning">
+                  çıkış yap
+                </Button>
               </form>
+              
             </Box>
           ) : !registerDone ? (
             <form onSubmit={(e) => isRegistered(e)}>
