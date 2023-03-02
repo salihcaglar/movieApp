@@ -16,7 +16,7 @@ import styles from "./_Login.module.scss";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import toast, { Toaster } from "react-hot-toast";
-import { useState } from "react";
+
 
 function Copyright(props) {
   return (
@@ -41,8 +41,8 @@ const validationSchema = yup.object({
 export default function Login() {
 
 
-  const notify = () => toast.success("Giriş yapıldı. Ana sayfaya yönlendiriliyorsunuz.");
 
+  const notify = () => toast.success("Giriş yapıldı. Ana sayfaya yönlendiriliyorsunuz.");
 
   const formik = useFormik({
     initialValues: {
@@ -51,16 +51,15 @@ export default function Login() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      {notify()}
+      {
+        notify();
+      }
       setTimeout(() => {
         window.location.replace("/");
       }, 1000);
     },
-    
   });
-  <Toaster 
-  position="top-right"
-  reverseOrder={false}/>
+  <Toaster position="top-right" reverseOrder={false} />;
   return (
     <>
       <img src="./images/loginbg.jpg" className={styles.background} />

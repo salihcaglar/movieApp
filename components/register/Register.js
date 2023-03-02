@@ -1,7 +1,7 @@
-import { auth, googleProvider } from "../../config/firebase";
-import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import {db} from '../../config/firebase'
-import { getDocs, collection} from 'firebase/firestore'
+// import { auth, googleProvider } from "../../config/firebase";
+// import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+// import {db} from '../../config/firebase'
+// import { getDocs, collection} from 'firebase/firestore'
 
 
 import * as React from "react";
@@ -47,9 +47,6 @@ const validationSchema = yup.object({
 
 export default function SignUp() {
 
-  const [movielist,setMovieList] = useState([]);
-
-  const moviesCollectionRef = collection(db, "movies")
 
   useEffect(() => {
     const getMovieList = async () => {
@@ -65,11 +62,7 @@ export default function SignUp() {
     getMovieList()
   }, [])
 
-  const getMovieList = () => {
 
-  }
-
-  
   const signIn = async () => {
     try {
       await createUserWithEmailAndPassword(auth, formik.values.email, formik.values.password, formik.values.name);
